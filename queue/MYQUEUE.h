@@ -2,21 +2,21 @@
 
 using namespace std;
 
-class Node{
+template<typename N>class Node{
     public:
-    int value;
+    N value;
     Node *next;
 
-    Node(int val)
+    Node(N val)
     {
         value= val;
         next = NULL;
     }
 };
-class Queue{
+template<typename Q>class Queue{
     public:
-    Node* front;
-    Node* rear;
+    Node <Q> *front;
+    Node <Q> *rear;
 
     Queue()
     {
@@ -24,9 +24,9 @@ class Queue{
         rear = NULL;
     }
     //enque-push
-    void push(int val)
+    void push(Q val)
     {
-        Node *newNode = new Node(val);
+        Node <Q> *newNode = new Node<Q>(val);
         if(front == NULL){
             front = newNode;
             rear = newNode;
@@ -36,14 +36,14 @@ class Queue{
         rear = rear->next;
     }
     //deque-pop
-    int pop(){
-        int chk=-1;
+    Q pop(){
+        Q chk;
         if(front==NULL)
         {
             cout<<"underflow || There is no element in the list"<<endl;
             return chk;
         }
-        Node *delNode;
+        Node <Q> *delNode;
         delNode = front;
         chk=delNode->value;
         front = front->next;
@@ -54,15 +54,15 @@ class Queue{
         return chk;
     }
     //peak->front() back()
-    int Front()
+    Q Front()
     {
-        int chk;
+        Q chk;
         chk = front->value;
         return chk;
     }
-    int Back()
+    Q Back()
     {
-        int chk;
+        Q chk;
         chk = rear->value;
         return chk;
     }

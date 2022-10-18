@@ -3,14 +3,33 @@
 
 using namespace std;
 
+typedef pair<int,int> mytype;
+
 int main()
 {
-    cout<<"hello"<<endl;
-    Queue q;
-    q.push(1);
-    q.push(2);
-    q.push(3);
-    cout<<q.pop()<<endl;
+    Queue <mytype> q;
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        int c1,c2;
+        cin>>c1>>c2;
+        q.push(make_pair(c1,c2));
+    }
+//    while(!q.empty()){
+//        cout<<q.pop()<<endl;
+//    }
+    if(!q.empty())
+    {
+        mytype chk;
+        chk = q.Front();
+        cout<<chk.first<<" | "<<chk.second<<endl;
+    }
+    if(!q.empty()){
+            mytype chk;
+            chk = q.Back();
+            cout<<chk.first<<" | "<<chk.second<<endl;
+    }
 
     return 0;
 }
