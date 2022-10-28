@@ -2,12 +2,12 @@
 
 using namespace std;
 
-template<typename N>class Node{
+template<typename N>class QueueNode{
     public:
     N value;
-    Node *next;
+    QueueNode *next;
 
-    Node(N val)
+    QueueNode(N val)
     {
         value= val;
         next = NULL;
@@ -15,8 +15,8 @@ template<typename N>class Node{
 };
 template<typename Q>class Queue{
     public:
-    Node <Q> *front;
-    Node <Q> *rear;
+    QueueNode <Q> *front;
+    QueueNode <Q> *rear;
 
     Queue()
     {
@@ -26,7 +26,7 @@ template<typename Q>class Queue{
     //enque-push
     void push(Q val)
     {
-        Node <Q> *newNode = new Node<Q>(val);
+        QueueNode <Q> *newNode = new QueueNode<Q>(val);
         if(front == NULL){
             front = newNode;
             rear = newNode;
@@ -43,7 +43,7 @@ template<typename Q>class Queue{
             cout<<"underflow || There is no element in the list"<<endl;
             return chk;
         }
-        Node <Q> *delNode;
+        QueueNode <Q> *delNode;
         delNode = front;
         chk=delNode->value;
         front = front->next;
