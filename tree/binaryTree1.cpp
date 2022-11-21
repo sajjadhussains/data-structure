@@ -88,10 +88,10 @@ int main()
         int value,left,right;
         cin>>value>>left>>right;
         allNodes[i]->data = value;
-        if(left>n-1 || right>n-1){
-            cout<<"Invalid Index";
-            break;
-        }
+//        if(left>n-1 || right>n-1){
+//            cout<<"Invalid Index";
+//            break;
+//        }
         if(left != -1){
             allNodes[i]->leftChild=allNodes[left];
         }
