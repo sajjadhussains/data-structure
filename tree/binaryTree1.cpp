@@ -38,6 +38,35 @@ void postOrder(treeNode* root,string &chk)
     postOrder(root->rightChild,chk);
     chk+=to_string(root->data);
 }
+
+void levelOrderTraversal(treeNode* root,string &chk){
+    if(root == NULL){
+        return;
+    }
+    queue<treeNode*>q;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty()){
+        treeNode* chkNode = q.front();
+        q.pop();
+        if(chkNode!=NULL){
+            cout<<chkNode->data<<" ";
+            chk+=to_string(chkNode->data);
+            if(chkNode->leftChild != NULL){
+                q.push(chkNode->leftChild);
+            }
+            if(chkNode->rightChild != NULL){
+                q.push(chkNode->rightChild);
+            }
+        }
+        else{
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+    }
+}
+
 void printTree(treeNode* root,int level){
     if(root == NULL)
     {
@@ -88,10 +117,10 @@ int main()
         int value,left,right;
         cin>>value>>left>>right;
         allNodes[i]->data = value;
-//        if(left>n-1 || right>n-1){
-//            cout<<"Invalid Index";
-//            break;
-//        }
+        if(left>n-1 || right>n-1){
+            cout<<"Invalid Index";
+            break;
+        }
         if(left != -1){
             allNodes[i]->leftChild=allNodes[left];
         }
@@ -100,15 +129,18 @@ int main()
         }
     }
     printTree(allNodes[0],0);
-    string inOrderString="";
-    string preOrderString="";
-    string postOrderString = "";
-    inOrder(allNodes[0],inOrderString);
-    preOrder(allNodes[0],preOrderString);
-    postOrder(allNodes[0],postOrderString);
-    cout<<"In order traversal: "<<inOrderString<<endl;
-    cout<<"Pre order traversal: "<<preOrderString<<endl;
-    cout<<"Post order traversal: "<<postOrderString<<endl;
+//    string inOrderString="";
+//    string preOrderString="";
+//    string postOrderString = "";
+string levelorderTraversal = "";
+//    inOrder(allNodes[0],inOrderString);
+//    preOrder(allNodes[0],preOrderString);
+//    postOrder(allNodes[0],postOrderString);
+        levelOrderTraversal(allNodes[0],levelorderTraversal);
+//    cout<<"In order traversal: "<<inOrderString<<endl;
+//    cout<<"Pre order traversal: "<<preOrderString<<endl;
+//    cout<<"Post order traversal: "<<postOrderString<<endl;
+cout<<endl<<"Level order traversal: "<<levelorderTraversal<<endl;
     return 0;
 }
 /*
