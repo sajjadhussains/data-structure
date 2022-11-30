@@ -16,6 +16,7 @@ public:
 };
 void printTree(treeNode* root,int level);
 void spacePrint(int level);
+void levelOrder(treeNode* root);
 void printTree(treeNode* root,int level)
 {
     if(root==NULL){
@@ -40,6 +41,35 @@ void printTree(treeNode* root,int level)
         cout<<"Right:";
         printTree(root->rightChild,level+1);
     }
+}
+void levelOrder(treeNode* root)
+{
+    if(root==NULL){
+        return;
+    }
+    queue<treeNode*>q;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty())
+    {
+        treeNode* chkNode = q.front();
+        q.pop();
+        if(chkNode!=NULL){
+            cout<<chkNode->data<<" ";
+            if(chkNode->leftChild != NULL){
+                q.push(chkNode->leftChild);
+            }
+            if(chkNode->rightChild != NULL){
+                q.push(chkNode->rightChild);
+            }
+        }
+        else{
+           if(!q.empty()){
+            q.push(NULL);
+           }
+        }
+    }
+
 }
 void spacePrint(int level)
 {
@@ -71,6 +101,7 @@ int main()
         }
     }
     printTree(allNodes[0],0);
+    levelOrder(allNodes[0]);
 
     return 0;
 }
