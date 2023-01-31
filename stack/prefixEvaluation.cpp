@@ -31,7 +31,7 @@ int prefixEvaluation(string chk)
         }
        }
     }
-    return st.pop();
+   return st.pop();
 }
 
 int main()
@@ -42,3 +42,6 @@ int main()
    cout<<result<<endl;
    return 0;
 }
+/*
+-+7*45+20
+*/

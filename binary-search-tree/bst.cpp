@@ -46,7 +46,7 @@ void inOrder(treeNode* root,string &chk)
 void preOrder(treeNode* root,string &chk)
 {
     if(root==NULL) return;
-    chk+=to_string(root->data);
+    chk+=(to_string(root->data)+" ");
     preOrder(root->leftChild,chk);
     preOrder(root->rightChild,chk);
 }
@@ -55,7 +55,7 @@ void postOrder(treeNode* root,string &chk)
     if(root==NULL) return;
     postOrder(root->leftChild,chk);
     postOrder(root->rightChild,chk);
-    chk+=to_string(root->data);
+    chk+=(to_string(root->data)+" ");
 }
 
 
@@ -231,6 +231,38 @@ treeNode* deletionBST(treeNode* root,int value)
     return root;
 }
 
+void zigzagTraversal(treeNode* root){
+    stack<treeNode*>currentLevel;
+    stack<treeNode*>nextLevel;
+    bool leftToRight=true;
+    currentLevel.push(root);
+    while(!currentLevel.empty()){
+        treeNode *x = currentLevel.top();
+        currentLevel.pop();
+        cout<<x->data<<" ";
+        if(leftToRight){
+            if(x->leftChild){
+                nextLevel.push(x->leftChild);
+            }
+            if(x->rightChild){
+                nextLevel.push(x->rightChild);
+            }
+        }
+        else{
+           if(x->rightChild){
+                nextLevel.push(x->rightChild);
+            }
+            if(x->leftChild){
+                nextLevel.push(x->leftChild);
+            }
+        }
+        if(currentLevel.empty()){
+            leftToRight = !leftToRight;
+            swap(currentLevel,nextLevel);
+        }
+    }
+}
+
 int main()
 {
     int n;
@@ -242,22 +274,34 @@ int main()
         cin>>value;
         root = insertionBST(root,value);
     }
-//    string traversal = "";
-//    inOrder(root,traversal);
-//    cout<<traversal<<endl;
-    int key;
-    cin>>key;
+    string traversal = "";
+    inOrder(root,traversal);
+    cout<<traversal<<endl;
+//    deletionBST(root,12);
+//    insertionBST(root,11);
+//    deletionBST(root,6);
+//    cout<<"After deletion 12:";
+//    string deleteTrav="";
+//    inOrder(root,deleteTrav);
+//    cout<<deleteTrav<<endl;
+//    int key;
+//    cin>>key;
 //    if(searchBST(root,key))     cout<<endl<<"value exists in the BST"<<endl;
 //    else cout<<"value doesn't exist in the BST"<<endl;
-    root = deletionBST(root,key);
-    string after = "";
-    inOrder(root,after);
-    cout<<after<<endl;
+   // root = deletionBST(root,key);
+//    string after = "";
+    //postOrder(root,after);
+//    int levelMax = levelOrderTraversal(root,after,1);
+//    cout<<after<<endl;
+    zigzagTraversal(root);
     return 0;
 }
 /*
-9
-11 5 9 43 34 1 2 7 21
+10
+11 5 9 43 34 1 2 7 8 21
+
+11
+15 11 26 8 12 20 30 6 9 14 35
 
 */
 
